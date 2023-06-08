@@ -8,7 +8,7 @@ for dataset in Spam Mushrooms Adult Credit
 do
     for problem in LR KM_16
     do
-        for experiment in selection
+        for experiment in utility
         do
             python3 main.py --experiment=$experiment --dataset_name=$dataset --problem_name=$problem
         done
