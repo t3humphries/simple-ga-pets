@@ -90,6 +90,8 @@ class K_Median(GA_Operations):
             else:
                 self.distance_matrix = cdist(public_data, private_data, metric='minkowski', p=1).T
                 if cache:
+                    if not os.path.exists('Cache/'):
+                        os.makedirs('Cache/')
                     with open('Cache/{}.p'.format(cache_id), 'wb') as out_file:
                         pickle.dump(self.distance_matrix, out_file)
             self.sensitivity = len(public_data[0])
@@ -143,6 +145,8 @@ class K_Median_Clipped_new(K_Median):
             self.distance_matrix = cdist(public_data, private_data, metric='minkowski', p=1).T
             f = lambda x: np.maximum(np.minimum(len(public_data[0])/2 , x), len(public_data[0])/4)
             self.distance_matrix = f(self.distance_matrix)
+            if not os.path.exists('Cache/'):
+                os.makedirs('Cache/')
             with open('Cache/{}.p'.format(cache_id), 'wb') as out_file:
                 pickle.dump(self.distance_matrix, out_file)
         self.cand_size = k

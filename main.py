@@ -488,7 +488,7 @@ def to_iterator(obj_ids):
 
 def main(args):
     
-    ray.init(num_cpus=155)
+    ray.init(num_cpus=args.num_cpus)
     args_map = {
         'generations' : [generations_experiment, saving_GA],
         'pg_generations' : [PrivGene_generations_experiment, std_priv_gene],
@@ -525,6 +525,7 @@ if __name__ == "__main__":
     parser.add_argument('--experiment', type=str, default='')
     parser.add_argument('--dataset_name', type=str, default='Spam')
     parser.add_argument('--problem_name', type=str, default='KM_16')
+    parser.add_argument('--num_cpus', type=int, default=4)
     args = parser.parse_args()
     print(vars(args))
     main(args)
