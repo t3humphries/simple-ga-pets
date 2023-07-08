@@ -1,6 +1,6 @@
 # Source code for the paper: Differentially Private Simple Genetic Algorithms
 ## Hardware Requirements
-To run all experiments in the paper, including grid searches, over a week is required on large machines with over 160 CPUs.
+To run all experiments in the paper, including grid searches, over a week is required on multiple large machines. We used 3 machines with 80 hyperthreaded cores (Intel Xeon E7-8870 at 2.40 GHz).
 However, a single run of the SimpleGA takes less than a minute on average quad-core hardware. 
 We thus give two interfaces to our code: 
 1) Run DP Simple GA (our_dpga.py)
@@ -12,13 +12,13 @@ You can find a docker image (with all the necessary dependencies installed) here
 https://hub.docker.com/r/t3humphr/dp_simple_ga
 
 You can pull directly from dockerhub with:
-<pre><code>docker pull t3humphr/dp_simple_ga
+<pre><code>docker pull t3humphr/dp_simple_ga:artifact_v1
 </code></pre>
 To run the container use:
 
-<pre><code>docker run -t --name test_container dp_simple_ga:first_draft</code></pre>
+<pre><code>docker run -t --name test_container t3humphr/dp_simple_ga:artifact_v1</code></pre>
 
-to start the container. Then:
+this starts the container and opens a Python CLI. Leave this running in the background and open a new terminal to attach a CLI to the container itself. Namely, run:
 
 <pre><code>docker exec -it test_container bash</code></pre>
 
@@ -77,7 +77,7 @@ The main.py file takes 3 primary args:
 |'gupta'| Run Gupta et al's Local Search algorithm|
 |'gupta_mod'| Run our modified version of Gupta et al's Local Search algorithm|
 
-We note to run all experiments takes over a week on a machine with 160CPUs. This would entail adding all experiments args above to the bash script. For simplicity, we leave only the smallest experiment, 'utility', which takes less than an hour on a 160CPU machine or perhaps a day on a quad-core. It can also be run on a single dataset and problem. For example, ```python3 main.py --experiment utility``` runs LR on Spam (the defaults) and takes only half an hour to run on a quad-core (default).
+We note to run all experiments takes over a week on large machines. This would entail adding all experiments args above to the bash script. For simplicity, we leave only the smallest experiment, 'utility', which takes less than an hour on a the large 80 core machines mentioned above or perhaps a day on a quad-core. It can also be run on a single dataset and problem. For example, ```python3 main.py --experiment utility``` runs LR on Spam (the defaults) and takes only half an hour to run on a quad-core (default). To plot the results run the ```sup_material_plots.ipynb``` notebook (run the first 2 cells, then run the utility experiment cell (line 62)).
 
 ### Plotting
 We included the jupiter notebook used to create the plots for our paper. We note that the experiments will need to be re-run for this script to work.
